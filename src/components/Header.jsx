@@ -62,7 +62,7 @@ function Header({ searchItems, cart, setOpen }) {
               textDecoration: "none",
             }}
           >
-            LOGO
+            E-Commerce
           </Typography>
           {/* For mobile screen */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -121,7 +121,7 @@ function Header({ searchItems, cart, setOpen }) {
               textDecoration: "none",
             }}
           >
-            LOGO
+            E-Commerce
           </Typography>
           <SearchField searchItems={searchItems} />
           {/* For big screens */}

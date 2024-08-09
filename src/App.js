@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import ProductList from "./components/Products/ProductList";
@@ -6,6 +7,7 @@ import MenuItems from "./components/DropdownMenu/MenuItems";
 import { Drawer, List, styled } from "@mui/material";
 import AllProducts from "./components/Products/AllProducts";
 import Cart from "./components/Cart/Cart";
+import Checkout from "./components/Checkout";
 
 const StyledMenu = styled(List)(({ theme }) => ({
   display: "flex",
@@ -115,34 +117,52 @@ function App() {
     fetchProductsByCategory();
   }, [selectedMenu]);
 
-  return (
-    <div className="App">
-      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <Cart
-          cart={cart}
-          onRemoveItem={handleRemoveItem}
-          onUpdateQuantity={handleUpdateQuantity}
-        />
-      </Drawer>
+  console.log(cart);
 
-      <Header searchItems={searchItems} cart={cart} setOpen={setOpen} />
-      <StyledMenu className="styled-menu" sx={{ padding: 0 }}>
-        {menuItems.map((item, index) => (
-          <MenuItems
-            item={item}
-            handler={setSelectedMenu}
-            key={index}
-            depth={1}
+  return (
+    <Router>
+      <div className="App">
+        <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+          <Cart
+            cart={cart}
+            onRemoveItem={handleRemoveItem}
+            onUpdateQuantity={handleUpdateQuantity}
+            setOpen={setOpen}
           />
-        ))}
-      </StyledMenu>
-      <ProductList
-        products={products}
-        selectedMenu={selectedMenu}
-        onAddToCart={handleAddToCart}
-      />
-      <AllProducts products={searchItems} onAddToCart={handleAddToCart} />
-    </div>
+        </Drawer>
+
+        <Header searchItems={searchItems} cart={cart} setOpen={setOpen} />
+      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <StyledMenu className="styled-menu" sx={{ padding: 0 }}>
+                {menuItems.map((item, index) => (
+                  <MenuItems
+                    item={item}
+                    handler={setSelectedMenu}
+                    key={index}
+                    depth={1}
+                  />
+                ))}
+              </StyledMenu>
+              <ProductList
+                products={products}
+                selectedMenu={selectedMenu}
+                onAddToCart={handleAddToCart}
+              />
+              <AllProducts
+                products={searchItems}
+                onAddToCart={handleAddToCart}
+              />
+            </>
+          }
+        />
+        <Route path="/checkout" element={<Checkout cart={cart} />} />
+      </Routes>
+    </Router>
   );
 }
 

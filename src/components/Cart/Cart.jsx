@@ -1,15 +1,21 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
 import React from "react";
 import CartItem from "./CartItem";
+import { useNavigate } from "react-router-dom";
 
-function Cart({ cart, onRemoveItem, onUpdateQuantity }) {
+function Cart({ cart, onRemoveItem, onUpdateQuantity, setOpen }) {
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    setOpen(false);
+    navigate("/checkout");
+  };
+
   const getTotalPrice = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
   const items = cart;
-
-  console.log(items);
 
   if (items.length === 0) {
     return (
@@ -62,7 +68,7 @@ function Cart({ cart, onRemoveItem, onUpdateQuantity }) {
         <Button
           variant="contained"
           color="primary"
-          href="/checkout"
+          onClick={handleCheckout}
           sx={{ margin: "15px 0" }}
         >
           Checkout

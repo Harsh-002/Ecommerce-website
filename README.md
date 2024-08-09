@@ -1,6 +1,44 @@
-# Ecommerce-website
+# Ecommerce-application
 
-E-commerce store made in react
+# E-Commerce Application
+
+This is a simple e-commerce application built using React, Material-UI, and the DummyJSON API. The application allows users to browse products, add them to a shopping cart, and proceed to checkout.
+
+## Live Demo
+
+[Live Demo](https://e-commerce-app-30daysjs.netlify.app/)
+
+## Features
+
+- **Product Browsing:** Browse products by categories.
+- **Search:** Search products by title.
+- **Shopping Cart:** Add products to the cart, update quantities, and remove items.
+- **Checkout:** Enter user information and place an order.
+- **Order Confirmation:** Display a message after successfully placing an order.
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/e-commerce-app.git
+   cd e-commerce-app
+   
+2. Navigate to project directory:
+
+   ```bash
+   cd your-repo-name
+   
+3. Install dependencies:
+
+   ```bash
+   npm install
+   
+4. Start development server:
+
+   ```bash
+   npm start
+
 
 Screenshots:
 

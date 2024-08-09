@@ -8,18 +8,50 @@ import {
   Grid,
   Box,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const CartItem = ({ id, name, price, quantity, image }) => {
-  const handleRemove = () => {};
+const CartItem = ({
+  id,
+  name,
+  price,
+  initialQuantity,
+  image,
+  onRemove,
+  onUpdateQuantity,
+}) => {
+  const [quantity, setQuantity] = useState(initialQuantity);
 
-  const handleIncreaseQuantity = () => {};
+  useEffect(() => {
+    setQuantity(initialQuantity);
+  }, [initialQuantity]);
 
-  const handleDecreaseQuantity = () => {};
+  const handleRemove = () => {
+    onRemove(id);
+  };
+
+  const handleIncreaseQuantity = () => {
+    setQuantity((prevQuantity) => {
+      const newQuantity = prevQuantity + 1;
+      onUpdateQuantity(id, newQuantity);
+      return newQuantity;
+    });
+  };
+
+  const handleDecreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity((prevQuantity) => {
+        const newQuantity = prevQuantity - 1;
+        onUpdateQuantity(id, newQuantity);
+        return newQuantity;
+      });
+    }
+  };
 
   const handleQuantityChange = (event) => {
     const value = parseInt(event.target.value, 10);
     if (!isNaN(value) && value > 0) {
+      setQuantity(value);
+      onUpdateQuantity(id, value);
     }
   };
 
@@ -60,14 +92,14 @@ const CartItem = ({ id, name, price, quantity, image }) => {
               color="text.secondary"
               component="div"
             >
-              Price: ₹{price.toFixed(2)}
+              Price: ${price.toFixed(2)}
             </Typography>
             <Typography
               variant="subtitle1"
               color="text.secondary"
               component="div"
             >
-              Total: ₹{totalPrice.toFixed(2)}
+              Total: ${totalPrice.toFixed(2)}
             </Typography>
           </CardContent>
         </Box>

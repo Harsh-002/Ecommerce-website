@@ -2,8 +2,14 @@ import { Box, Button, Divider, Typography } from "@mui/material";
 import React from "react";
 import CartItem from "./CartItem";
 
-function Cart() {
-  const items = [];
+function Cart({ cart, onRemoveItem, onUpdateQuantity }) {
+  const getTotalPrice = () => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
+  const items = cart;
+
+  console.log(items);
 
   if (items.length === 0) {
     return (
@@ -40,15 +46,17 @@ function Cart() {
           <CartItem
             key={item.id}
             id={item.id}
-            name={item.name}
+            name={item.title}
             price={item.price}
-            quantity={item.quantity}
-            image={item.image}
+            initialQuantity={item.quantity}
+            image={item.images[0]}
+            onRemove={onRemoveItem}
+            onUpdateQuantity={onUpdateQuantity}
           />
         ))}
         <Divider />
         <Typography variant="h5" fontWeight={700} margin={"5px 0"}>
-          Total: ₹
+          Total: ${getTotalPrice().toFixed(2)}
         </Typography>
         <Divider />
         <Button

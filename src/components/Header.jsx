@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
 import SearchField from "./SearchField";
-import Cart from "./Cart/Cart";
 
 import {
   AppBar,
@@ -16,17 +15,15 @@ import {
   Tooltip,
   MenuItem,
   Badge,
-  Drawer,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import { ShoppingCart, Adb } from "@mui/icons-material";
 
-function Header() {
+function Header({ searchItems, cart, setOpen }) {
   //Nav anchors
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [open, setOpen] = useState(false);
 
   //To open and close nav menu
   const handleOpenNavMenu = (event) => {
@@ -46,10 +43,6 @@ function Header() {
 
   return (
     <AppBar position="static">
-      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <Cart />
-      </Drawer>
-
       {/* Header starts */}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -106,7 +99,7 @@ function Header() {
                 sx={{ gap: "10px", justifyContent: "space-between" }}
               >
                 <Typography textAlign="center">Cart</Typography>
-                <Badge badgeContent={4} color="error">
+                <Badge badgeContent={cart.length} color="error">
                   <ShoppingCart onClick={() => setOpen(true)} />
                 </Badge>
               </MenuItem>
@@ -130,7 +123,7 @@ function Header() {
           >
             LOGO
           </Typography>
-          <SearchField />
+          <SearchField searchItems={searchItems} />
           {/* For big screens */}
           <Box
             sx={{
@@ -151,7 +144,7 @@ function Header() {
               }}
             >
               Cart
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={cart.length} color="error">
                 <ShoppingCart />
               </Badge>
             </Button>

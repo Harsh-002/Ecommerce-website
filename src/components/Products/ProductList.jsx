@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRef } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import "./products.Module.css";
 import ProductCard from "./ProductCard";
@@ -36,7 +36,7 @@ const NextArrow = (props) => {
   );
 };
 
-const ProductList = ({ products }) => {
+const ProductList = ({ products, selectedMenu, onAddToCart }) => {
   const settings = {
     dots: false,
     infinite: false,
@@ -83,10 +83,13 @@ const ProductList = ({ products }) => {
   return (
     <Box sx={{ margin: "50px 0px", position: "relative" }}>
       <div className="slider-container products-slider">
+        <Typography sx={{ textAlign: "left", mx: "20px", fontSize: "1.5rem" }}>
+          Category: {selectedMenu}
+        </Typography>
         <Slider ref={slider} {...settings}>
           {products.map((product, id) => (
             <Grid item key={id} xs={12} sm={6} md={4} lg={3}>
-              <ProductCard product={product} onAddToCart={() => {}} />
+              <ProductCard product={product} onAddToCart={onAddToCart} />
             </Grid>
           ))}
         </Slider>

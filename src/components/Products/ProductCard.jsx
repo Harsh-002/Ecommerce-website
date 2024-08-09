@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import "./products.Module.css";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onAddToCart }) => {
   return (
     <Card>
       <CardActionArea>
@@ -42,7 +42,11 @@ const ProductCard = ({ product }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => onAddToCart(product)}
+        >
           Add to Cart
         </Button>
       </CardActions>

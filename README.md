@@ -1,5 +1,3 @@
-# Ecommerce-application
-
 # E-Commerce Application
 
 This is a simple e-commerce application built using React, Material-UI, and the DummyJSON API. The application allows users to browse products, add them to a shopping cart, and proceed to checkout.
@@ -21,13 +19,13 @@ This is a simple e-commerce application built using React, Material-UI, and the 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/e-commerce-app.git
-   cd e-commerce-app
+   git clone https://github.com/Harsh-002/Ecommerce-website.git
+   
    
 2. Navigate to project directory:
 
    ```bash
-   cd your-repo-name
+   cd e-commerce-app
    
 3. Install dependencies:
 
